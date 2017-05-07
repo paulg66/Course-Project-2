@@ -1,0 +1,10 @@
+require(dplyr)
+require(ggplot2)
+coal <- grepl("Fuel Comb.*Coal", SCC$EI.Sector)
+coalSub <- subset(SCC, coal)
+coalUSA <- suppressWarnings(NEI[which(NEI$SCC == coalSub$SCC),])
+coalUSA <- coalUSA[order(coalUSA$year),]
+png("plot4.png", width=480, height=480)
+g <- ggplot(coalUSA, aes(x=factor(year), y=Emissions, fill=year))
+g + geom_bar(stat="identity") +xlab("year") + ylab("PM25 Emissions in tons") + ggtitle("Coal Related Emissions in the USA by Year")
+dev.off()

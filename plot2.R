@@ -1,0 +1,6 @@
+require(dplyr)
+Emissions <- summarise(group_by(NEI,year,fips),Emissions = sum(Emissions))
+EmissionsBTL <- subset(Emissions, fips == "24510")
+png("plot2.png", width=480, height=480)
+barplot(EmissionsBTL$Emissions,col = c("blue", "red","yellow","green"),xlab = "years",ylab = "PM25 Emissions in tons", names.arg = EmissionsBTL$year, main = "Total PM25 Emissions in Baltimore by Year")
+dev.off()

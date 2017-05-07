@@ -1,0 +1,5 @@
+require(dplyr)
+Emissions <- summarise(group_by(NEI,year),Emissions = sum(Emissions))
+png("plot1.png", width=480, height=480)
+barplot(Emissions$Emissions,col = c("blue", "red","yellow","green"),xlab = "years",ylab = "PM25 Emissions in tons", names.arg = Emissions$year, main = "Total PM25 Emissions in the USA by Year")
+dev.off()
